@@ -6,22 +6,20 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-        #map { height: 480px; width: 100%; margin: 16px 0; border-radius: 8px; z-index: 0; }
+    #map { height: 480px; width: 100%; margin: 16px 0; border-radius: 8px; z-index: 0; }
+    .leaflet-popup-content { min-width: 180px; }
+    .popup-titre { font-weight: bold; margin-bottom: 4px; display: block; }
+    .popup-lien-fiche { display: inline-block; margin-top: 6px; cursor: pointer; color: #06c; text-decoration: underline; background: none; border: none; padding: 0; font: inherit; }
   </style>
 </head>
 <body>
   <!--   à penser à faire : hébergeur, si pas site, logo insta si -->
   
-  <img src="image.png " style="width: 150px;">
+  <img src="image.png ">
   <h2>Partenaires de l'amicale</h2>
 
   <p id="loadStatus" style="font-style: italic;">Chargement des données…</p>
-    
-  <ul class="onglet">
-      <li><a href="modal_menu.html">Recherche</a></li>
-      <li><a href="contact.html">Contact</a></li>
-  </ul>
-    
+
   <!-- Champ de recherche -->
   <input type="text" id="searchInput" placeholder="Rechercher...">
 
@@ -48,7 +46,7 @@
   <div id="modal" style="display:none;">
     <h3 id="modal-title"></h3>
     <p><u>Catégorie :</u> <span id="modal-categorie"></span></p>
-    <p><u>Ville(s) / Adresse(s) :</u> <span id="modal-villes"></span></p>
+    <p><u>Villes / Adresse(s) :</u> <span id="modal-villes"></span></p>
     <p><u>Avantage et réduction :</u><br><span id="modal-description"></span></p>
     <p><a id="modal-lien" href="#" target="_blank">Voir le site</a></p>
     <p><a id="modal-iti" href="#" target="_blank">Itinéraire</a></p>
@@ -90,12 +88,12 @@
 
       items.forEach(item => {
         const index = data.indexOf(item);
-        (item.locations || []).forEach(loc => {
+        (item.locations || []).forEach((loc, locIndex) => {
           const marker = L.marker([loc.lat, loc.lng]);
           const popupHtml =
             `<span class="popup-titre">${item.nom}</span>` +
             `${loc.adresse}<br><em>${item.categorie}</em>` +
-            `<br><button class="popup-lien-fiche" onclick="openModal(${index})">Voir la fiche</button>`;
+            `<br><button class="popup-lien-fiche" onclick="openModal(${index}, ${locIndex})">Voir la fiche</button>`;
           marker.bindPopup(popupHtml);
           markersLayer.addLayer(marker);
           bounds.push([loc.lat, loc.lng]);
@@ -125,7 +123,7 @@
       });
     }
 
-    function openModal(index) {
+    function openModal(index, locIndex = 0) {
       const item = data[index];
       document.getElementById("modal-title").textContent = item.nom;
       document.getElementById("modal-categorie").textContent = item.categorie;
@@ -136,9 +134,25 @@
       document.getElementById("modal").style.display = "block";
       document.getElementById("overlay").style.display = "block";
 
-      // Centre la carte sur l'enseigne sélectionnée et ouvre son marqueur
+      // Lien "Itinéraire" : ouvre Google Maps avec la destination pré-remplie
+      // (l'adresse précise sur laquelle on a cliqué, s'il y en a plusieurs).
+      // En laissant le point de départ vide, Google Maps utilise automatiquement
+      // la position actuelle de l'utilisateur (sur mobile comme sur ordinateur,
+      // sous réserve qu'il autorise la géolocalisation).
+      const itiEl = document.getElementById("modal-iti");
+      if (item.locations && item.locations.length > 0) {
+        const loc = item.locations[locIndex] || item.locations[0];
+        const destination = encodeURIComponent(`${loc.lat},${loc.lng}`);
+        itiEl.href = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+        itiEl.style.display = "inline";
+      } else {
+        // Pas d'adresse physique (enseigne uniquement en ligne) : pas d'itinéraire possible.
+        itiEl.style.display = "none";
+      }
+
+      // Centre la carte sur l'enseigne (adresse cliquée) et ouvre son marqueur
       if (item.locations && item.locations.length > 0 && map) {
-        const loc = item.locations[0];
+        const loc = item.locations[locIndex] || item.locations[0];
         map.setView([loc.lat, loc.lng], 15);
       }
     }

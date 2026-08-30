@@ -1,0 +1,702 @@
+- nom: A nos mousses
+  categorie: Alimentaire
+  villes:
+  - Saint-Avé
+  lien: https://anosmousses.fr/
+  description: 15 % sur les prestations proposées :<br>- Caravane Bar ambulant<br>- Bar mobile<br>- Soirée entre amis (dégustation de bières)
+  locations:
+  - ville: Saint-Avé
+    adresse: 12 Résidence les Châtaigniers, 56890 Saint-Avé
+    lat: 47.6749963
+    lng: -2.7215448
+- nom: Brasserie Kerblei
+  categorie: Alimentaire
+  villes:
+  - Baden
+  lien: https://www.microbrasseriekerblei.com/
+  description: 19,23 % sur les bouteilles de 33cl vendue à 2,10 € au lieu de 2,60 € pièce
+  locations:
+  - ville: Baden
+    adresse: 5 Rue de Kernavalo Mané Bihan, 56870 Baden
+    lat: 47.61952
+    lng: -2.8861317
+- nom: Domino's Pizza
+  categorie: Alimentaire
+  villes:
+  - Vannes
+  lien: https://www.dominos.fr/
+  description: 20 % de réduction* sur l'addition pour les ventes à emporter ou livrées dans les magasins participants situés à Vannes<br><br>* Offres non cumulables. Hors modification de recette et/ou suppléments pâtes et ingrédients. Non valable sur l'alcool. Dans la limite des stocks disponibles.
+  locations:
+  - ville: Vannes
+    adresse: 51 Bd de la Paix, 56000 Vannes
+    lat: 47.6607941
+    lng: -2.753863
+  - ville: Vannes
+    adresse: 9 Av. de la Marne, 56000 Vannes
+    lat: 47.6590628
+    lng: -2.7746491
+  - ville: Vannes
+    adresse: 60 Av. Paul Cézanne, 56000 Vannes
+    lat: 47.6769666
+    lng: -2.7730626
+- nom: Fromages de nos Terroirs
+  categorie: Alimentaire
+  villes:
+  - Vannes
+  lien: https://www.fromagesdenosterroirs.com/
+  description: 10 % de réduction sur les prix publics
+  locations:
+  - ville: Vannes
+    adresse: 55 Av. du Général Borgnis Desbordes, 56000 Vannes
+    lat: 47.6553235
+    lng: -2.7908616
+- nom: L'aile ou la cuisse
+  categorie: Alimentaire
+  villes:
+  - Lauzach
+  - Saint Jean Brevelay
+  - Plouay
+  lien: https://www.laileoulacuisse.bzh/
+  description: 10 % sur les tarifs publics
+  locations:
+  - ville: Lauzach
+    adresse: La Haie, 56190 Lauzach
+    lat: 47.6078203
+    lng: -2.5516189
+  - ville: Saint Jean Brevelay
+    adresse: ZI de Saint-Jean, 56660 Saint-Jean-Brévelay
+    lat: 47.8542867
+    lng: -2.7280689
+  - ville: Plouay
+    adresse: ZI de Restavy, 56240 Plouay
+    lat: 47.9138835
+    lng: -3.353725
+- nom: La Cabosse Créative
+  categorie: Alimentaire
+  villes:
+  - Grand-Champ
+  - Vannes
+  lien: https://www.lacabosse-creative.com/
+  description: 20 % de réduction sur les prix publics (non cumulable avec la carte de fidélité)
+  locations:
+  - ville: Grand-Champ
+    adresse: 67 Rue du Général De Gaulle, 56390 Grand-Champ
+    lat: 47.7598935
+    lng: -2.856125
+  - ville: Vannes
+    adresse: 5 Pl. du Poids Public, 56000 Vannes
+    lat: 47.6554992
+    lng: -2.7580766
+- nom: La Cave du Vincin
+  categorie: Alimentaire
+  villes:
+  - Vannes
+  lien: https://www.lacaveduvincin.fr/
+  description: 10 % de réduction sur les prix publics
+  locations:
+  - ville: Vannes
+    adresse: 59 Rue du Vincin, 56000 Vannes
+    lat: 47.6555501
+    lng: -2.7914878
+- nom: La Ferme de la Vallée du Loch
+  categorie: Alimentaire
+  villes:
+  - Grand-Champ
+  lien: https://www.le-cochon-de-la-vallee-du-loch.fr/
+  description: Jusqu'à 30 % de réduction lors des offres flash
+  locations:
+  - ville: Grand-Champ
+    adresse: Le Vailhouit, 56390 Grand-Champ
+    lat: 47.776299
+    lng: -2.869914
+- nom: Garage Roady
+  categorie: Auto
+  villes:
+  - Séné
+  lien: ''
+  description: A partir de 10 % de remise (voir détails sur place)
+  locations:
+  - ville: Séné
+    adresse: ZAC du Poulfanc, Chemin du Petit Versa, 56860 Séné
+    lat: 47.652955
+    lng: -2.7227844
+- nom: Auto Contrôle du Golfe
+  categorie: Auto
+  villes:
+  - Vannes
+  lien: https://www.autovision.fr/centre/560037-auto-controle-du-golfe-vannes/
+  description: 20 % de réduction sur le contrôle technique
+  locations:
+  - ville: Vannes
+    adresse: Kerthomas ZC, 56000 Vannes
+    lat: 47.665417
+    lng: -2.795799
+- nom: Loxity
+  categorie: Auto
+  villes:
+  - Theix-Noyalo
+  - Redon
+  - Queven
+  - Rennes
+  lien: https://www.loxity.bzh/
+  description: 10 % toute l'année pour la location de voitures, utilitaires ou minibus
+  locations:
+  - ville: Theix-Noyalo
+    adresse: 2 Rue Denis Papin, 56450 Theix-Noyalo
+    lat: 47.6492603
+    lng: -2.6995894
+  - ville: Redon
+    adresse: 3 Rue de Briangaud, 35600 Redon
+    lat: 47.667799
+    lng: -2.071718
+  - ville: Queven
+    adresse: 14 Rue Lavoisier, 56530 Quéven
+    lat: 47.7796982
+    lng: -3.4160472
+  - ville: Rennes
+    adresse: 20 Rue du Manoir de Servigné, 35000 Rennes
+    lat: 48.1019297
+    lng: -1.7291029
+- nom: April
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Vannes
+  lien: https://www.april-beauty.com/fr/
+  description: 25 % hors promotions et hors marques points rouges dans tous les magasins de France
+  locations:
+  - ville: Vannes
+    adresse: 17 Rue du Méné, 56000 Vannes
+    lat: 47.659075
+    lng: -2.7563933
+- nom: Cédric Le Gac
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Séné
+  lien: https://cedriclegac.fr
+  description: 60 € la séance (au lieu de 70 €).<br>Psychopraticien en hypnose et thérapies brèves RITMO® (EMDR®).
+  locations:
+  - ville: Séné
+    adresse: 19 Rue des Vosges, 56860 Séné
+    lat: 47.6506
+    lng: -2.7124
+- nom: Cephyse Salomon Cabinet
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Vannes
+  lien: https://www.cephysesalomon.net/
+  description: '55 € la séance (au lieu de 65 €) soit plus de 15 % de réduction.<br>Domaines de compétences : Magnétisme - Amincissement - Naturopathe - Sophro-hypnose.'
+  locations:
+  - ville: Vannes
+    adresse: 2 Rue Charles Riou, Résidence Square Flore, 56000 Vannes
+    lat: 47.6637799
+    lng: -2.7765687
+- nom: FH Le Rai Leroy Fragrances
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Vannes
+  lien: https://sarl-fh-le-rai-leroy.sumupstore.com/
+  description: 'Gamme existante Eau de toilette : 15 %<br>Gamme existante Eau de parfum : 15 %<br>Parfum sur mesure, formulation unique : 20 %'
+  locations:
+  - ville: Vannes
+    adresse: 11 Rue Saint-Guenhaël, 56000 Vannes
+    lat: 47.6578954
+    lng: -2.7563161
+- nom: Le Collectif des Lunetiers
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Vannes
+  lien: https://www.lecollectifdeslunetiers.fr/opticien/france/morbihan/opticien-vannes/vannes
+  description: 'Réduction minimum, non cumulable sur tout autre forfait, promotion ou avantage en cours :<br>- 30 % sur les montures optiques<br>- 15 % sur les verres optiques (voir conditions en magasin)<br>- 25 % sur les solaires<br>- Appareils auditifs : chargeur et garantie offerts pour les appareils de classe 2'
+  locations:
+  - ville: Vannes
+    adresse: Zone Commerciale de Parc Lann, 56000 Vannes
+    lat: 47.6681204
+    lng: -2.7927973
+- nom: Maison Hädenn
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - sur internet
+  lien: https://www.maisonhadenn.fr
+  description: 20 % sur la commande
+  locations: []
+- nom: Un chemin pour deux mains
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Sarzeau
+  lien: https://uncheminpourdeuxmains.fr/
+  description: Réduction de 15 %.
+  locations:
+  - ville: Sarzeau
+    adresse: 41 Rue Belle Croix, 56370 Sarzeau
+    lat: 47.5407185
+    lng: -2.690681
+- nom: Ma kibell
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Vannes
+  lien: ''
+  description: 10 % sur les tarifs affichés en magasin.<br>Cumulable avec les avantages de la carte fidélité.
+  locations:
+  - ville: Vannes
+    adresse: 1 Rue des Vierges, 56000 Vannes
+    lat: 47.6571682
+    lng: -2.756533
+- nom: Aloize Bijoux
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Vannes
+  lien: ''
+  description: 40 % toute l'année sans minimum d'achat sur tous les produits (hors produits signalés par l'absence du double prix affiché de la fiche produit sur le site Internet ou produits signalés par pastille colorée en magasin).
+  locations:
+  - ville: Vannes
+    adresse: 42 Rue Théophraste Renaudot, 56000 Vannes
+    lat: 47.6626105
+    lng: -2.7879413
+- nom: Castel Clara
+  categorie: Hôtellerie
+  villes:
+  - Bangor
+  lien: https://www.castel-clara.com/
+  description: 10 % de réduction sous forme de code promotionnel à demander à l'Amicale.<br>Valable par téléphone ou sur les sites des établissements.<br>Offre non annulable, non remboursable, valable toute l'année hors ponts de mai, Pentecôte, ainsi que du 11 juillet au 25 août 2025.
+  locations:
+  - ville: Bangor
+    adresse: Port Goulphar, 56360 Bangor (Belle-Île-en-Mer)
+    lat: 47.304635
+    lng: -3.227046
+- nom: Le Grand Large
+  categorie: Hôtellerie
+  villes:
+  - Bangor
+  lien: https://hotelgrandlarge.com/
+  description: 10 % de réduction sous forme de code promotionnel à demander à l'Amicale.<br>Valable par téléphone ou sur les sites des établissements.<br>Offre non annulable, non remboursable, valable toute l'année hors ponts de mai, Pentecôte, ainsi que du 11 juillet au 25 août 2025.
+  locations:
+  - ville: Bangor
+    adresse: Goulphar, 56360 Bangor (Belle-Île-en-Mer)
+    lat: 47.302948
+    lng: -3.230578
+- nom: Sinagot Hôtels
+  categorie: Hôtellerie
+  villes:
+  - Vannes
+  lien: ''
+  description: 10 € de réduction sur les tarifs publics des hôtels de Vannes suivants :<br>- Kyriad Prestige - Palais des Arts<br>- Ibis Styles<br>- Urban Style Hôtel de France<br>- Villa Kerasy Hôtel & Spa
+  locations:
+  - ville: Vannes
+    adresse: 91 Rue Winston Churchill, 56000 Vannes (siège du groupe hôtelier)
+    lat: 47.6393485
+    lng: -2.7680225
+- nom: Brasserie Le Cardinal
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: https://www.lecardinalvannes.fr/
+  description: 15 % sur l'addition, uniquement pour l'adhérent.
+  locations:
+  - ville: Vannes
+    adresse: 7 Pl. Saint-Pierre, 56000 Vannes
+    lat: 47.6574431
+    lng: -2.7575068
+- nom: FENYX
+  categorie: Restaurant
+  villes:
+  - Séné
+  lien: https://www.fenyx-vannes.fr/services-3
+  description: 15 % de réduction sur l'addition.<br>Ouvert les midis du lundi au samedi, ainsi que les vendredis et samedis soirs.
+  locations:
+  - ville: Séné
+    adresse: Rte de Nantes, 56860 Séné
+    lat: 47.6510564
+    lng: -2.7237015
+- nom: La Brasserie Bleue
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: https://www.brasserie-bleue.fr/
+  description: 15 % sur l'addition, y compris pour les personnes qui vous accompagnent, pour la partie restaurant.<br>10 € de réduction sur les tarifs publics de l'hôtel.
+  locations:
+  - ville: Vannes
+    adresse: 91 Rue Winston Churchill, 56000 Vannes
+    lat: 47.6393501
+    lng: -2.7679244
+- nom: La Crêperie de Jeanne
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: https://www.lacreperiedejeanne.com/
+  description: 15 % sur l'addition, y compris pour les non-adhérents qui vous accompagnent.
+  locations:
+  - ville: Vannes
+    adresse: 6 Rue Bienheureux Pierre René Rogues, 56000 Vannes
+    lat: 47.6566252
+    lng: -2.7573855
+- nom: La Rotisserie de Jeanne
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: ''
+  description: 15 % de réduction.
+  locations:
+  - ville: Vannes
+    adresse: 24 Rue Noé, 56000 Vannes
+    lat: 47.655729
+    lng: -2.7579906
+- nom: La Table de Jeanne
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: https://www.latabledejeanne.com/
+  description: 15 % sur l'addition, y compris pour les non-adhérents qui vous accompagnent.
+  locations:
+  - ville: Vannes
+    adresse: 13 Pl. de la Poissonnerie, 56000 Vannes
+    lat: 47.6549528
+    lng: -2.7586361
+- nom: Le bistrot de la gare
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: ''
+  description: 15 % sur l'addition, y compris pour les non-adhérents qui vous accompagnent.
+  locations:
+  - ville: Vannes
+    adresse: 28 Av. Favrel et Lincy, 56000 Vannes
+    lat: 47.6646786
+    lng: -2.7527851
+- nom: Le Café Comptoir
+  categorie: Restaurant
+  villes:
+  - Séné
+  lien: https://lecafecomptoir.fr/
+  description: 10 % sur l'addition, y compris pour les non-adhérents qui vous accompagnent (le soir uniquement).
+  locations:
+  - ville: Séné
+    adresse: Rte de Nantes, 56860 Séné
+    lat: 47.6511421
+    lng: -2.7240571
+- nom: Le Café Toha
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: ''
+  description: 15 % sur l'addition (déjeuner sur place ou à emporter).<br>Ouvert du lundi au vendredi de 9h à 17h, possibilité de réservation et privatisation les soirs et week-ends.
+  locations:
+  - ville: Vannes
+    adresse: 4 Rue Alfred Kastler, 56000 Vannes
+    lat: 47.6430549
+    lng: -2.7446821
+- nom: Le Comptoir de Jeanne
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: https://www.lecomptoirdejeanne.fr/
+  description: 15 % sur l'addition, y compris pour les non-adhérents qui vous accompagnent.
+  locations:
+  - ville: Vannes
+    adresse: 6 Pl. du Poids Public, 56000 Vannes
+    lat: 47.6554895
+    lng: -2.7576882
+- nom: My Couscous
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: https://mycouscousbox.fr/fr
+  description: 'Offre exclusive : 15 % de réduction sur l''addition, adhérents + convives, hors promotion.'
+  locations:
+  - ville: Vannes
+    adresse: 4 Passage de Faréham, 56000 Vannes
+    lat: 47.6389595
+    lng: -2.7760877
+- nom: Roadside
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: https://www.roadside.fr/
+  description: 15 % par commande / adhérent.
+  locations:
+  - ville: Vannes
+    adresse: 135 Av. de la Marne, 56000 Vannes
+    lat: 47.6601575
+    lng: -2.7935643
+- nom: « Le Bar à lire » - Espace Traverse
+  categorie: Restaurant
+  villes:
+  - Vannes
+  lien: ''
+  description: 1 Café / Thé gourmand offert pour l'achat d'une entrée + plat (cette offre est valable uniquement les midis, du mardi au vendredi dès 11 h).
+  locations:
+  - ville: Vannes
+    adresse: 8 Rue du Commerce, 56000 Vannes (rive gauche du port)
+    lat: 47.6511269
+    lng: -2.7570331
+- nom: P'tit Galichon
+  categorie: Restaurant
+  villes:
+  - Vannes
+  - Saint-Avé
+  - Berric
+  lien: ''
+  description: 15 % de réduction sur l'addition.<br>Cuisine faite maison, réalisée avec des produits frais et locaux, 100 % BIO, de saison.<br>Le tout dans des emballages compostables et réchauffables au four ou au micro-onde !<br><br>Sur place et sur commande par SMS au 06.85.59.07.39.
+  locations:
+  - ville: Vannes
+    adresse: Le PIBS 2, 56000 Vannes — mercredis et jeudis, 11h30-13h30 (et jeudis 18h30-20h)
+    lat: 47.6429601
+    lng: -2.7515138
+  - ville: Saint-Avé
+    adresse: Marché Bio, Pl. Notre-Dame-du-Loc, 56890 Saint-Avé — mardis 16h-19h
+    lat: 47.6897474
+    lng: -2.731504
+  - ville: Berric
+    adresse: Marché, Place de l'Église, 56230 Berric — vendredis 16h-19h
+    lat: 47.6331
+    lng: -2.5244
+- nom: 47° Nautik
+  categorie: Sports Loisirs
+  villes:
+  - Arradon
+  - Baden
+  - Séné
+  lien: https://www.47nautik.com/
+  description: '10 % (hors passeport voile et combinaisons) pour les activités de l''agent, et de ses ascendants directs : conjoint / enfants, sur les stages lors des vacances scolaires et cours particuliers sur les périodes d''ouverture des points de location.'
+  locations:
+  - ville: Arradon
+    adresse: Rue de la Carrière, 56610 Arradon (base nautique La Pointe)
+    lat: 47.6164392
+    lng: -2.8275243
+  - ville: Baden
+    adresse: 31 Rte de Toulindac, 56870 Baden (Baie de Kerdelan)
+    lat: 47.59986
+    lng: -2.8707729
+  - ville: Séné
+    adresse: 66 Rte de la Pointe du Bill, 56860 Séné
+    lat: 47.6003412
+    lng: -2.7339464
+- nom: Aquagolfe
+  categorie: Sports Loisirs
+  villes:
+  - Elven
+  - Grand-Champ
+  - Vannes
+  lien: https://www.golfedumorbihan-vannesagglomeration.bzh/espacesaquatiques
+  description: Application des tarifs réduits précisés sur le site de l'agglomération.
+  locations:
+  - ville: Elven
+    adresse: Allée Claudie Haigneré, 56250 Elven
+    lat: 47.7247967
+    lng: -2.5866141
+  - ville: Grand-Champ
+    adresse: Rue du Général De Gaulle, 56390 Grand-Champ (Piscine du Loc'h)
+    lat: 47.7591755
+    lng: -2.8558099
+  - ville: Vannes
+    adresse: 26 Rue Winston Churchill, 56000 Vannes (Piscine de Kercado)
+    lat: 47.645319
+    lng: -2.771489
+  - ville: Vannes
+    adresse: 20 Rue Émile Jourdan, 56000 Vannes (Piscine Vanocéa)
+    lat: 47.6708811
+    lng: -2.7696363
+- nom: Funbreizh
+  categorie: Sports Loisirs
+  villes:
+  - Surzur
+  lien: https://selection-sejours-individuels.ty-win.io/
+  description: 15 % de réduction sur les séjours individuels dans le Grand Ouest proposés par l'agence Funbreizh.
+  locations:
+  - ville: Surzur
+    adresse: 24 Grande Rue, 56450 Surzur
+    lat: 47.576801
+    lng: -2.6299639
+- nom: Tonton Outdoor
+  categorie: Sports Loisirs
+  villes:
+  - Vannes
+  lien: https://www.tonton-outdoor.com/fr_FR/
+  description: 15 % sur les chaussures, 5 % sur l'électronique, 10 % sur le reste (textile, sac à dos, etc.).
+  locations:
+  - ville: Vannes
+    adresse: 110 Av. de la Marne, 56000 Vannes
+    lat: 47.6606771
+    lng: -2.7882166
+- nom: BP innov' couvreur
+  categorie: Travaux Décoration
+  villes:
+  - Vannes
+  lien: https://bpinnov.com
+  description: 15 % de réduction sur toutes les prestations.
+  locations:
+  - ville: Vannes
+    adresse: 11 Allée de Kerlann, 56000 Vannes
+    lat: 47.6643367
+    lng: -2.7851804
+- nom: Carrelage Vannes
+  categorie: Travaux Décoration
+  villes:
+  - Plescop
+  lien: ''
+  description: 20 à 25 % sur les tarifs publics (soit les tarifs professionnels et artisans) des articles au magasin de Plescop.<br>Réduction non cumulable avec des réductions accordées aux artisans.
+  locations:
+  - ville: Plescop
+    adresse: 11 Rue Blaise Pascal, ZA de Tréhuinec, 56890 Plescop
+    lat: 47.6794984
+    lng: -2.8000277
+- nom: DreamWay
+  categorie: Travaux Décoration
+  villes:
+  - sur internet
+  lien: https://dreamway.fr/
+  description: Tableaux en métal brillants et légers.<br>20 % sur les prix publics.
+  locations: []
+- nom: PFG
+  categorie: Travaux Décoration
+  villes:
+  - Theix-Noyalo
+  lien: ''
+  description: 30 % de réduction sur l'ensemble des produits (tarifs accordés aux professionnels du bâtiment).<br>Pliage et façonnage sur mesure de tôles fines.
+  locations:
+  - ville: Theix-Noyalo
+    adresse: 2 bis Impasse Surcouf, ZA Atlantheix, 56450 Theix-Noyalo
+    lat: 47.6435921
+    lng: -2.6984704
+- nom: Rexel
+  categorie: Travaux Décoration
+  villes:
+  - Vannes
+  lien: ''
+  description: Jusqu'à 50 % selon produits.
+  locations:
+  - ville: Vannes
+    adresse: Rue Alain Gerbault, ZI du Prat, 56000 Vannes
+    lat: 47.664875
+    lng: -2.7310318
+- nom: Christophe Couvreur
+  categorie: Sophrologie et Hypnose
+  villes:
+  - Séné
+  lien: https://hevoud.fr
+  description: 28 % de réduction sur les séances individuelles d'hypnose, soit 50 € la séance au lieu de 70 €.<br>20 % de réduction sur les séances individuelles de sophrologie, soit 40 € la séance au lieu de 50 €.
+  locations:
+  - ville: Séné
+    adresse: 21 Rue d'Alsace, Le Poulfanc, 56860 Séné
+    lat: 47.6506082
+    lng: -2.716309
+- nom: Herbalife
+  categorie: Beauté/Bien-être/Bijoux
+  villes: []
+  lien: ''
+  description: '15 % de remises sur votre programme Herbalife !<br>1. Programme Perte de poids : découverte + bilan bien-être offert : 200,50 € → 170 €<br>2. Programme Vitalité et bien-être : découverte + bilan bien-être offert : 104,50 € → 89 €<br>3. Programme Nutrition sportive : découverte + bilan bien-être offert : 111 € → 94 €<br>4. Programme Routine beauté : découverte + scan du visage offert : 108 € → 94 €<br>(distributrice indépendante, offre proposée directement auprès de la partenaire)'
+  locations: []
+- nom: La Cave de Jean-Yves
+  categorie: Cave à vin
+  villes:
+  - Vannes
+  lien: https://www.cjy.fr
+  description: '1 € de réduction/bouteille sur le tarif public indiqué sur le site.<br>+ 10 % de réduction supplémentaire, pour tout achat de 6 bouteilles minimum.<br>+ Possibilité d''être livré(e) au siège de GMVa (RDV à prendre individuellement avec le partenaire).<br><br>Pour bénéficier de cette offre : se connecter sur www.cjy.fr, ajouter les articles au panier, puis choisir impérativement le paiement par chèque au moment du paiement (le site n''étant pas paramétré pour déduire automatiquement la réduction réservée aux adhérents).'
+  locations:
+  - ville: Vannes
+    adresse: 'Livraison sur RDV : 20 Allée des Tamaris, 56000 Vannes (ou au siège de GMVa)'
+    lat: 47.6418979
+    lng: -2.7711179
+- nom: Appart Fitness
+  categorie: Club de sports
+  villes:
+  - Grand-Champ
+  - Vannes
+  lien: ''
+  description: 29 € au lieu de 39,96 € / 4 semaines (engagement annuel) soit plus de 28 % de réduction !<br>+ Les frais d'inscription offerts (au lieu de 49 €).<br><br>Une fois l'abonnement souscrit, accès à l'ensemble des 110 salles du réseau Appart Fitness (pas uniquement à Grand-Champ).
+  locations:
+  - ville: Grand-Champ
+    adresse: 1 Rue Simone Veil, Lann Guinet ZA, 56390 Grand-Champ
+    lat: 47.7531501
+    lng: -2.843065
+  - ville: Vannes
+    adresse: 53 Rte de Sainte-Anne, 56000 Vannes
+    lat: 47.663402
+    lng: -2.780228
+- nom: Miramar
+  categorie: Thalasso
+  villes:
+  - Arzon
+  lien: https://miramar-lacigale.com/
+  description: Réductions allant jusqu'à 45 % sur les Parcours marins, offres avec hébergement…
+  locations:
+  - ville: Arzon
+    adresse: Port du Crouesty, Rte du Petit Mont, 56640 Arzon
+    lat: 47.5414757
+    lng: -2.8901895
+- nom: Restaurant Le Priano
+  categorie: Restaurant
+  villes:
+  - Surzur
+  lien: ''
+  description: 15 % de réduction sur l'addition.
+  locations:
+  - ville: Surzur
+    adresse: 16 Rue Jean Monnet, 56450 Surzur
+    lat: 47.5780858
+    lng: -2.6301894
+- nom: Boutik Gregam
+  categorie: Beauté/Bien-être/Bijoux
+  villes:
+  - Grand-Champ
+  lien: ''
+  description: 15 % de réduction.
+  locations:
+  - ville: Grand-Champ
+    adresse: 3 Rue du Général De Gaulle, 56390 Grand-Champ
+    lat: 47.75867
+    lng: -2.8463694
+- nom: L'opticien Surzur
+  categorie: Opticien
+  villes:
+  - Surzur
+  lien: ''
+  description: 20 % de réduction sur les montures optiques et 20 % minimum sur les verres (non cumulables avec les remises accordées par votre mutuelle, mais au plus avantageux pour l'adhérent).<br>+ 30 % de réduction sur les solaires.
+  locations:
+  - ville: Surzur
+    adresse: 13 Rue de l'Église, 56450 Surzur
+    lat: 47.5773951
+    lng: -2.6297195
+- nom: Rrunning
+  categorie: Textiles et chaussures de sport
+  villes:
+  - Vannes
+  lien: ''
+  description: 16 % de réduction.
+  locations:
+  - ville: Vannes
+    adresse: 17 Allée de Kerlann, 56000 Vannes
+    lat: 47.6645591
+    lng: -2.7840854
+- nom: Style Coiffure
+  categorie: Coiffeur
+  villes:
+  - Surzur
+  lien: ''
+  description: 10 % de réduction sur les prestations prix publics (hors produits).
+  locations:
+  - ville: Surzur
+    adresse: 11 Place Xavier de Langlais, 56450 Surzur
+    lat: 47.5776765
+    lng: -2.6281051
+- nom: Cidrerie Nicol
+  categorie: Cidrerie
+  villes:
+  - Surzur
+  lien: ''
+  description: 7,5 % de réduction sur les tarifs publics.
+  locations:
+  - ville: Surzur
+    adresse: Kergenêts, 56450 Surzur
+    lat: 47.5587853
+    lng: -2.6110586
+- nom: Création Center Color
+  categorie: Coiffeur
+  villes:
+  - Vannes
+  lien: ''
+  description: 10 % de réduction sur les prestations prix publics (hors produits).
+  locations:
+  - ville: Vannes
+    adresse: 10 Rue des Chanoines, 56000 Vannes
+    lat: 47.6583402
+    lng: -2.756056

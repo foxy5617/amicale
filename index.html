@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Partenaires Amicale</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+        #map { height: 480px; width: 100%; margin: 16px 0; border-radius: 8px; z-index: 0; }
+  </style>
+</head>
+<body>
+  <!--   à penser à faire : hébergeur, si pas site, logo insta si -->
+  
+  <img src="image.png " style="width: 150px;">
+  <h2>Partenaires de l'amicale</h2>
+
+  <p id="loadStatus" style="font-style: italic;">Chargement des données…</p>
+    
+  <ul class="onglet">
+      <li><a href="modal_menu.html">Recherche</a></li>
+      <li><a href="contact.html">Contact</a></li>
+  </ul>
+    
+  <!-- Champ de recherche -->
+  <input type="text" id="searchInput" placeholder="Rechercher...">
+
+  <!-- Menu déroulant des catégories -->
+  <select class="menu" id="categorySelect">
+    <option value="toutes">Toutes les catégories</option>
+  </select>
+
+  <!-- Menu déroulant des villes -->
+  <select class="menu" id="citySelect">
+    <option value="toutes">Toutes les villes</option>
+  </select>
+
+  <!-- Bouton de réinitialisation -->
+  <button class="reinitialisation" onclick="resetFilters()">Réinitialiser les filtres</button>
+
+  <!-- Carte interactive -->
+  <div id="map"></div>
+
+  <!-- Liste des éléments -->
+  <ul id="itemList"></ul>
+
+  <!-- Modale unique -->
+  <div id="modal" style="display:none;">
+    <h3 id="modal-title"></h3>
+    <p><u>Catégorie :</u> <span id="modal-categorie"></span></p>
+    <p><u>Ville(s) / Adresse(s) :</u> <span id="modal-villes"></span></p>
+    <p><u>Avantage et réduction :</u><br><span id="modal-description"></span></p>
+    <p><a id="modal-lien" href="#" target="_blank">Voir le site</a></p>
+    <p><a id="modal-iti" href="#" target="_blank">Itinéraire</a></p>
+    <button onclick="closeModal()">Fermer</button>
+  </div>
+
+  <div id="overlay" style="display:none;" onclick="closeModal()"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  <script>
+    // Les données des enseignes sont désormais stockées dans un fichier externe
+    // "donnee_en_dico.yaml" (à placer dans le même dossier que ce fichier HTML),
+    // pour ne pas surcharger le code de la page. Elles sont chargées ci-dessous.
+    let data = [];
+
+    const searchInput = document.getElementById("searchInput");
+    const categorySelect = document.getElementById("categorySelect");
+    const citySelect = document.getElementById("citySelect");
+    const listElement = document.getElementById("itemList");
+
+    // --- Carte interactive (Leaflet / OpenStreetMap) ---
+    let map;
+    let markersLayer;
+
+    function initMap() {
+      map = L.map('map');
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      markersLayer = L.layerGroup().addTo(map);
+      map.setView([47.66, -2.76], 10); // vue par défaut centrée sur Vannes
+    }
+
+    function renderMarkers(items) {
+      markersLayer.clearLayers();
+      const bounds = [];
+
+      items.forEach(item => {
+        const index = data.indexOf(item);
+        (item.locations || []).forEach(loc => {
+          const marker = L.marker([loc.lat, loc.lng]);
+          const popupHtml =
+            `<span class="popup-titre">${item.nom}</span>` +
+            `${loc.adresse}<br><em>${item.categorie}</em>` +
+            `<br><button class="popup-lien-fiche" onclick="openModal(${index})">Voir la fiche</button>`;
+          marker.bindPopup(popupHtml);
+          markersLayer.addLayer(marker);
+          bounds.push([loc.lat, loc.lng]);
+        });
+      });
+
+      if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [30, 30], maxZoom: 13 });
+      } else {
+        map.setView([47.66, -2.76], 10);
+      }
+    }
+
+    function renderList(items) {
+      listElement.innerHTML = "";
+      renderMarkers(items);
+
+      if (items.length === 0) {
+        listElement.innerHTML = "<li>Aucun résultat.</li>";
+        return;
+      }
+
+      items.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="#" onclick="openModal(${data.indexOf(item)}); return false;"><strong>${item.nom}</strong></a> — ${item.categorie} — Villes : ${item.villes.join(", ")}`;
+        listElement.appendChild(li);
+      });
+    }
+
+    function openModal(index) {
+      const item = data[index];
+      document.getElementById("modal-title").textContent = item.nom;
+      document.getElementById("modal-categorie").textContent = item.categorie;
+      const adresses = (item.locations || []).map(loc => loc.adresse);
+      document.getElementById("modal-villes").textContent = adresses.length > 0 ? adresses.join(" | ") : item.villes.join(", ");
+      document.getElementById("modal-description").innerHTML = item.description;
+      document.getElementById("modal-lien").href = item.lien || "#";
+      document.getElementById("modal").style.display = "block";
+      document.getElementById("overlay").style.display = "block";
+
+      // Centre la carte sur l'enseigne sélectionnée et ouvre son marqueur
+      if (item.locations && item.locations.length > 0 && map) {
+        const loc = item.locations[0];
+        map.setView([loc.lat, loc.lng], 15);
+      }
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    function populateDropdowns() {
+      const categories = [...new Set(data.map(item => item.categorie))];
+      const cities = [...new Set(data.flatMap(item => item.villes))].sort((a, b) => a.localeCompare(b));
+
+      categories.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        categorySelect.appendChild(option);
+      });
+
+      cities.forEach(city => {
+        const option = document.createElement("option");
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+      });
+    }
+
+    function filterList() {
+      const search = searchInput.value.toLowerCase();
+      const selectedCat = categorySelect.value;
+      const selectedCity = citySelect.value;
+
+      const filtered = data.filter(item => {
+        const matchesSearch =
+          item.nom.toLowerCase().includes(search) ||
+          item.categorie.toLowerCase().includes(search) ||
+          item.villes.some(v => v.toLowerCase().includes(search));
+
+        const matchesCategory = selectedCat === "toutes" || item.categorie === selectedCat;
+        const matchesCity = selectedCity === "toutes" || item.villes.includes(selectedCity);
+
+        return matchesSearch && matchesCategory && matchesCity;
+      });
+
+      renderList(filtered);
+    }
+
+    function resetFilters() {
+      searchInput.value = "";
+      categorySelect.value = "toutes";
+      citySelect.value = "toutes";
+      renderList(data);
+    }
+
+    let debounceTimeout;
+    searchInput.addEventListener("input", () => {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(filterList, 200);
+    });
+
+    categorySelect.addEventListener("change", filterList);
+    citySelect.addEventListener("change", filterList);
+
+    async function chargerDonnees() {
+      const statusEl = document.getElementById("loadStatus");
+      try {
+        const reponse = await fetch("donnee_en_dico.yaml");
+        if (!reponse.ok) {
+          throw new Error("HTTP " + reponse.status);
+        }
+        const texteYaml = await reponse.text();
+        data = jsyaml.load(texteYaml);
+
+        statusEl.style.display = "none";
+        initMap();
+        populateDropdowns();
+        renderList(data);
+      } catch (erreur) {
+        console.error("Erreur de chargement du fichier YAML :", erreur);
+        statusEl.innerHTML =
+          "⚠️ Impossible de charger <code>donnee_en_dico.yaml</code>. " +
+          "Si vous ouvrez ce fichier directement depuis votre disque (adresse commençant par <code>file://</code>), " +
+          "les navigateurs bloquent ce type de chargement pour des raisons de sécurité. " +
+          "Lancez un petit serveur local (par exemple <code>python3 -m http.server</code> dans le dossier du site, " +
+          "puis ouvrez <code>http://localhost:8000</code>), ou déposez les fichiers sur un vrai hébergement web.";
+      }
+    }
+
+    chargerDonnees();
+  </script>
+
+</body>
+</html>

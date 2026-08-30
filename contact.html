@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Partenaires Amicale</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #map { height: 480px; width: 100%; margin: 16px 0; border-radius: 8px; z-index: 0; }
+    .leaflet-popup-content { min-width: 180px; }
+    .popup-titre { font-weight: bold; margin-bottom: 4px; display: block; }
+    .popup-lien-fiche { display: inline-block; margin-top: 6px; cursor: pointer; color: #06c; text-decoration: underline; background: none; border: none; padding: 0; font: inherit; }
+  </style>
+</head>
+<body>
+    <img src="image.png " style="width: 150px;">
+  <h2>Partenaires de l'amicale</h2>
+    
+  <ul class="onglet">
+      <li><a href="modal_menu.html">Recherche</a></li>
+      <li><a href="contact.html">Contact</a></li>
+  </ul>
+    <h3>Vous voulez nous proposer un nouveau partenaire, entrez les informations suivantes</h3>
+    <p>nom de l'entreprise</p>
+	<input type="text" name="firstname" id="text1" onchange="myAction()" value="" size="30">
+		<script>
+		function myAction() {
+		var x = document.getElementById("text1"); 
+		 return x.value ; // on récupère le contenu de la zone de saisie
+		}
+		</script>
+    <p>numéro de telephone de l'entreprise</p>
+	<input type="text" name="num" id="text2" onchange="myAction()" value="" size="30">
+		<script>
+		function myAction() {
+		var x = document.getElementById("text1"); 
+		 return x.value ; // on récupère le contenu de la zone de saisie
+		}
+		</script>
+
+
+</body>
+</html>

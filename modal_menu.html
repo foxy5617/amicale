@@ -33,8 +33,13 @@
   
   <img src="image.png" style="width: 150px;">
   <h2>Partenaires de l'amicale</h2>
-  <p><a href="#" onclick="sessionStorage.removeItem('gmva_auth'); window.location.href='index.html'; return false;">Se déconnecter</a></p>
-
+  
+    <ul class="onglet">
+      <li><a href="index.html">Recherche</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="#" onclick="sessionStorage.removeItem('gmva_auth'); window.location.href='index.html'; return false;">Se déconnecter</a></li>
+  </ul>
+  
   <p id="loadStatus" style="font-style: italic;">Chargement des données…</p>
 
   <!-- Champ de recherche -->

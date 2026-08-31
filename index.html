@@ -2,247 +2,81 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Partenaires Amicale</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Partenaires Amicale — Accès</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    #map { height: 480px; width: 100%; margin: 16px 0; border-radius: 8px; z-index: 0; }
-    .leaflet-popup-content { min-width: 180px; }
-    .popup-titre { font-weight: bold; margin-bottom: 4px; display: block; }
-    .popup-lien-fiche { display: inline-block; margin-top: 6px; cursor: pointer; color: #06c; text-decoration: underline; background: none; border: none; padding: 0; font: inherit; }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .login-box {
+      text-align: center;
+      padding: 24px;
+      max-width: 320px;
+      width: 100%;
+    }
+    .login-box img {
+      max-width: 220px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 24px;
+    }
+    .login-box input[type="password"] {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #erreur {
+      color: #c0392b;
+      margin-top: 12px;
+      min-height: 1.2em;
+    }
   </style>
 </head>
 <body>
-  <!--   à penser à faire : hébergeur, si pas site, logo insta si -->
-  
-  <img src="image.png ">
-  <h2>Partenaires de l'amicale</h2>
 
-  <p id="loadStatus" style="font-style: italic;">Chargement des données…</p>
-
-  <!-- Champ de recherche -->
-  <input type="text" id="searchInput" placeholder="Rechercher...">
-
-  <!-- Menu déroulant des catégories -->
-  <select class="menu" id="categorySelect">
-    <option value="toutes">Toutes les catégories</option>
-  </select>
-
-  <!-- Menu déroulant des villes -->
-  <select class="menu" id="citySelect">
-    <option value="toutes">Toutes les villes</option>
-  </select>
-
-  <!-- Bouton de réinitialisation -->
-  <button class="reinitialisation" onclick="resetFilters()">Réinitialiser les filtres</button>
-
-  <!-- Carte interactive -->
-  <div id="map"></div>
-
-  <!-- Liste des éléments -->
-  <ul id="itemList"></ul>
-
-  <!-- Modale unique -->
-  <div id="modal" style="display:none;">
-    <h3 id="modal-title"></h3>
-    <p><u>Catégorie :</u> <span id="modal-categorie"></span></p>
-    <p><u>Villes / Adresse(s) :</u> <span id="modal-villes"></span></p>
-    <p><u>Avantage et réduction :</u><br><span id="modal-description"></span></p>
-    <p><a id="modal-lien" href="#" target="_blank">Voir le site</a></p>
-    <p><a id="modal-iti" href="#" target="_blank">Itinéraire</a></p>
-    <button onclick="closeModal()">Fermer</button>
+  <div class="login-box">
+    <img src="image.png" alt="Logo de l'Amicale">
+    <form id="loginForm" onsubmit="return verifierMotDePasse();">
+      <input type="password" id="motDePasse" placeholder="Mot de passe" autofocus>
+      <button type="submit">Accéder au site</button>
+    </form>
+    <p id="erreur"></p>
   </div>
 
-  <div id="overlay" style="display:none;" onclick="closeModal()"></div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
   <script>
-    // Les données des enseignes sont désormais stockées dans un fichier externe
-    // "donnee_en_dico.yaml" (à placer dans le même dossier que ce fichier HTML),
-    // pour ne pas surcharger le code de la page. Elles sont chargées ci-dessous.
-    let data = [];
+    const MOT_DE_PASSE = "gmva";
 
-    const searchInput = document.getElementById("searchInput");
-    const categorySelect = document.getElementById("categorySelect");
-    const citySelect = document.getElementById("citySelect");
-    const listElement = document.getElementById("itemList");
+    function verifierMotDePasse() {
+      const saisie = document.getElementById("motDePasse").value.trim();
+      const erreurEl = document.getElementById("erreur");
 
-    // --- Carte interactive (Leaflet / OpenStreetMap) ---
-    let map;
-    let markersLayer;
-
-    function initMap() {
-      map = L.map('map');
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
-      markersLayer = L.layerGroup().addTo(map);
-      map.setView([47.66, -2.76], 10); // vue par défaut centrée sur Vannes
-    }
-
-    function renderMarkers(items) {
-      markersLayer.clearLayers();
-      const bounds = [];
-
-      items.forEach(item => {
-        const index = data.indexOf(item);
-        (item.locations || []).forEach((loc, locIndex) => {
-          const marker = L.marker([loc.lat, loc.lng]);
-          const popupHtml =
-            `<span class="popup-titre">${item.nom}</span>` +
-            `${loc.adresse}<br><em>${item.categorie}</em>` +
-            `<br><button class="popup-lien-fiche" onclick="openModal(${index}, ${locIndex})">Voir la fiche</button>`;
-          marker.bindPopup(popupHtml);
-          markersLayer.addLayer(marker);
-          bounds.push([loc.lat, loc.lng]);
-        });
-      });
-
-      if (bounds.length > 0) {
-        map.fitBounds(bounds, { padding: [30, 30], maxZoom: 13 });
+      if (saisie === MOT_DE_PASSE) {
+        // Mémorise l'accès pour le reste de la session de navigation, et ajoute
+        // aussi "?auth=1" dans l'URL pour que ça marche même si le stockage
+        // n'est pas partagé entre les deux pages (cas de certains navigateurs
+        // en ouverture locale des fichiers, sans serveur web).
+        sessionStorage.setItem("gmva_auth", "ok");
+        window.location.href = "modal_menu.html?auth=1";
       } else {
-        map.setView([47.66, -2.76], 10);
+        erreurEl.textContent = "Mot de passe incorrect.";
+        document.getElementById("motDePasse").value = "";
+        document.getElementById("motDePasse").focus();
       }
+      return false; // empêche le rechargement de la page par le formulaire
     }
-
-    function renderList(items) {
-      listElement.innerHTML = "";
-      renderMarkers(items);
-
-      if (items.length === 0) {
-        listElement.innerHTML = "<li>Aucun résultat.</li>";
-        return;
-      }
-
-      items.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `<a href="#" onclick="openModal(${data.indexOf(item)}); return false;"><strong>${item.nom}</strong></a> — ${item.categorie} — Villes : ${item.villes.join(", ")}`;
-        listElement.appendChild(li);
-      });
-    }
-
-    function openModal(index, locIndex = 0) {
-      const item = data[index];
-      document.getElementById("modal-title").textContent = item.nom;
-      document.getElementById("modal-categorie").textContent = item.categorie;
-      const adresses = (item.locations || []).map(loc => loc.adresse);
-      document.getElementById("modal-villes").textContent = adresses.length > 0 ? adresses.join(" | ") : item.villes.join(", ");
-      document.getElementById("modal-description").innerHTML = item.description;
-      document.getElementById("modal-lien").href = item.lien || "#";
-      document.getElementById("modal").style.display = "block";
-      document.getElementById("overlay").style.display = "block";
-
-      // Lien "Itinéraire" : ouvre Google Maps avec la destination pré-remplie
-      // (l'adresse précise sur laquelle on a cliqué, s'il y en a plusieurs).
-      // En laissant le point de départ vide, Google Maps utilise automatiquement
-      // la position actuelle de l'utilisateur (sur mobile comme sur ordinateur,
-      // sous réserve qu'il autorise la géolocalisation).
-      const itiEl = document.getElementById("modal-iti");
-      if (item.locations && item.locations.length > 0) {
-        const loc = item.locations[locIndex] || item.locations[0];
-        const destination = encodeURIComponent(`${loc.lat},${loc.lng}`);
-        itiEl.href = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
-        itiEl.style.display = "inline";
-      } else {
-        // Pas d'adresse physique (enseigne uniquement en ligne) : pas d'itinéraire possible.
-        itiEl.style.display = "none";
-      }
-
-      // Centre la carte sur l'enseigne (adresse cliquée) et ouvre son marqueur
-      if (item.locations && item.locations.length > 0 && map) {
-        const loc = item.locations[locIndex] || item.locations[0];
-        map.setView([loc.lat, loc.lng], 15);
-      }
-    }
-
-    function closeModal() {
-      document.getElementById("modal").style.display = "none";
-      document.getElementById("overlay").style.display = "none";
-    }
-
-    function populateDropdowns() {
-      const categories = [...new Set(data.map(item => item.categorie))];
-      const cities = [...new Set(data.flatMap(item => item.villes))].sort((a, b) => a.localeCompare(b));
-
-      categories.forEach(cat => {
-        const option = document.createElement("option");
-        option.value = cat;
-        option.textContent = cat;
-        categorySelect.appendChild(option);
-      });
-
-      cities.forEach(city => {
-        const option = document.createElement("option");
-        option.value = city;
-        option.textContent = city;
-        citySelect.appendChild(option);
-      });
-    }
-
-    function filterList() {
-      const search = searchInput.value.toLowerCase();
-      const selectedCat = categorySelect.value;
-      const selectedCity = citySelect.value;
-
-      const filtered = data.filter(item => {
-        const matchesSearch =
-          item.nom.toLowerCase().includes(search) ||
-          item.categorie.toLowerCase().includes(search) ||
-          item.villes.some(v => v.toLowerCase().includes(search));
-
-        const matchesCategory = selectedCat === "toutes" || item.categorie === selectedCat;
-        const matchesCity = selectedCity === "toutes" || item.villes.includes(selectedCity);
-
-        return matchesSearch && matchesCategory && matchesCity;
-      });
-
-      renderList(filtered);
-    }
-
-    function resetFilters() {
-      searchInput.value = "";
-      categorySelect.value = "toutes";
-      citySelect.value = "toutes";
-      renderList(data);
-    }
-
-    let debounceTimeout;
-    searchInput.addEventListener("input", () => {
-      clearTimeout(debounceTimeout);
-      debounceTimeout = setTimeout(filterList, 200);
-    });
-
-    categorySelect.addEventListener("change", filterList);
-    citySelect.addEventListener("change", filterList);
-
-    async function chargerDonnees() {
-      const statusEl = document.getElementById("loadStatus");
-      try {
-        const reponse = await fetch("donnee_en_dico.yaml");
-        if (!reponse.ok) {
-          throw new Error("HTTP " + reponse.status);
-        }
-        const texteYaml = await reponse.text();
-        data = jsyaml.load(texteYaml);
-
-        statusEl.style.display = "none";
-        initMap();
-        populateDropdowns();
-        renderList(data);
-      } catch (erreur) {
-        console.error("Erreur de chargement du fichier YAML :", erreur);
-        statusEl.innerHTML =
-          "⚠️ Impossible de charger <code>donnee_en_dico.yaml</code>. " +
-          "Si vous ouvrez ce fichier directement depuis votre disque (adresse commençant par <code>file://</code>), " +
-          "les navigateurs bloquent ce type de chargement pour des raisons de sécurité. " +
-          "Lancez un petit serveur local (par exemple <code>python3 -m http.server</code> dans le dossier du site, " +
-          "puis ouvrez <code>http://localhost:8000</code>), ou déposez les fichiers sur un vrai hébergement web.";
-      }
-    }
-
-    chargerDonnees();
   </script>
 
 </body>

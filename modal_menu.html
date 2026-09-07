@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    #map { height: 480px; width: 100%; margin: 16px 0; border-radius: 8px; z-index: 0; }
+    #map { height: 400px; width: 100%; margin: 16px 0; border-radius: 8px; z-index: 0; }
     .leaflet-popup-content { min-width: 180px; }
     .popup-titre { font-weight: bold; margin-bottom: 4px; display: block; }
     .popup-lien-fiche { display: inline-block; margin-top: 6px; cursor: pointer; color: #06c; text-decoration: underline; background: none; border: none; padding: 0; font: inherit; }
@@ -36,8 +36,7 @@
   
   <ul class="onglet">
       <li><a href="modal_menu.html">Recherche</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="#" onclick="sessionStorage.removeItem('gmva_auth'); window.location.href='index.html'; return false;">Se déconnecter</a></li>
+      <li><a href="contact.html">Contacter l'Amicale</a></li>
   </ul>
   
   <p id="loadStatus" style="font-style: italic;">Chargement des données…</p>
@@ -115,7 +114,7 @@
           const popupHtml =
             `<span class="popup-titre">${item.nom}</span>` +
             `${loc.adresse}<br><em>${item.categorie}</em>` +
-            `<br><button class="popup-lien-fiche" onclick="openModal(${index}, ${locIndex})">Voir la fiche</button>`;
+            `<br><button class="popup-lien-fiche" onclick="openModal(${index}, ${locIndex})">Voir la fiche et l'itinéraire</button>`;
           marker.bindPopup(popupHtml);
           markersLayer.addLayer(marker);
           bounds.push([loc.lat, loc.lng]);

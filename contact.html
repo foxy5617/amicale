@@ -18,10 +18,10 @@
     
   <ul class="onglet">
       <li><a href="modal_menu.html">Recherche</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html">Contacter l'Amicale</a></li>
   </ul>
-    <h3>Vous voulez nous proposer un nouveau partenaire! Entrez les informations suivantes</h3>
-    <p>Nom de l'entreprise</p>
+    <h3>Vous voulez nous proposer un nouveau partenaire ! Entrez les informations suivantes :</h3>
+    <p>Nom de l'adérant'</p>
 	<input type="text" name="firstname" id="text1" onchange="myAction()" value="" size="30">
 		<script>
 		function myAction() {
@@ -29,29 +29,47 @@
 		 return x.value ; // on récupère le contenu de la zone de saisie
 		}
 		</script>
-    <p>Numéro de telephone de l'entreprise</p>
+    <p>Nom de l'entreprise</p>
 	<input type="text" name="num" id="text2" onchange="myAction()" value="" size="30">
 		<script>
 		function myAction() {
-		var x = document.getElementById("text1"); 
+		var x = document.getElementById("text2"); 
 		 return x.value ; // on récupère le contenu de la zone de saisie
 		}
 		</script>
 	
-    <h3>Vous voulez nous faire part de votre avis! Entrez les informations suivantes</h3>
-    <p>Nom de l'entreprise</p>
-	<input type="text" name="firstname" id="text3" onchange="myAction()" value="" size="30">
+	<p>Nom du contact dans l'entreprise</p>
+	<input type="text" name="num" id="text3" onchange="myAction()" value="" size="30">
 		<script>
 		function myAction() {
 		var x = document.getElementById("text3"); 
 		 return x.value ; // on récupère le contenu de la zone de saisie
 		}
 		</script>
-    <p>Commentaire</p>
+	
+	<p>Numéro de telephone de l'entreprise</p>
 	<input type="text" name="num" id="text4" onchange="myAction()" value="" size="30">
 		<script>
 		function myAction() {
 		var x = document.getElementById("text4"); 
+		 return x.value ; // on récupère le contenu de la zone de saisie
+		}
+		</script>
+	
+    <h3>Vous voulez nous faire part de votre avis ! Entrez les informations suivantes : </h3>
+    <p>Nom de l'entreprise</p>
+	<input type="text" name="firstname" id="text5" onchange="myAction()" value="" size="30">
+		<script>
+		function myAction() {
+		var x = document.getElementById("text5"); 
+		 return x.value ; // on récupère le contenu de la zone de saisie
+		}
+		</script>
+    <p>Commentaire</p>
+	<input type="text" name="num" id="text6" onchange="myAction()" value="" size="30">
+		<script>
+		function myAction() {
+		var x = document.getElementById("text6"); 
 		 return x.value ; // on récupère le contenu de la zone de saisie
 		}
 		</script>

@@ -214,8 +214,6 @@
     lng: -2.7927973
 - nom: Maison Hädenn
   categorie: Beauté/Bien-être/Bijoux
-  villes:
-  - sur internet
   lien: https://www.maisonhadenn.fr
   description: 20 % sur la commande
   locations: []
@@ -470,7 +468,7 @@
     adresse: 66 Rte de la Pointe du Bill, 56860 Séné
     lat: 47.6003412
     lng: -2.7339464
-- nom: Aquagolfe
+- nom: Piscine Aquagolfe
   categorie: Sports Loisirs
   villes:
   - Elven
@@ -542,7 +540,6 @@
 - nom: DreamWay
   categorie: Travaux Décoration
   villes:
-  - sur internet
   lien: https://dreamway.fr/
   description: Tableaux en métal brillants et légers.<br>20 % sur les prix publics.
   locations: []

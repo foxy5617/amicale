@@ -6,73 +6,87 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
+    /* Cohérent avec les autres pages du site */
+    html { font-size: 120%; }
+
     #map { height: 480px; width: 100%; margin: 16px 0; border-radius: 8px; z-index: 0; }
     .leaflet-popup-content { min-width: 180px; }
     .popup-titre { font-weight: bold; margin-bottom: 4px; display: block; }
     .popup-lien-fiche { display: inline-block; margin-top: 6px; cursor: pointer; color: #06c; text-decoration: underline; background: none; border: none; padding: 0; font: inherit; }
+
+    form { margin-bottom: 32px; }
+    form p { margin-bottom: 4px; }
+    form input[type="text"], form textarea {
+      margin-bottom: 12px;
+      padding: 6px;
+      font: inherit;
+    }
+    form button[type="submit"] {
+      padding: 8px 20px;
+      font: inherit;
+      cursor: pointer;
+    }
+    .honeypot-field {
+      position: absolute;
+      left: -9999px;
+    }
   </style>
 </head>
 <body>
-    <img src="image.png " style="width: 150px;">
+  <img src="image.png" style="width: 150px;">
   <h2>Partenaires de l'amicale</h2>
-    
+
   <ul class="onglet">
-      <li><a href="modal_menu.html">Recherche</a></li>
-      <li><a href="contact.html">Contacter l'Amicale</a></li>
+    <li><a href="modal_menu.html">Recherche</a></li>
+    <li><a href="contact.html">Contacter l'Amicale</a></li>
   </ul>
-    <h3>Vous voulez nous proposer un nouveau partenaire ! Entrez les informations suivantes :</h3>
-    <p>Nom de l'adérant'</p>
-	<input type="text" name="firstname" id="text1" onchange="myAction()" value="" size="30">
-		<script>
-		function myAction() {
-		var x = document.getElementById("text1"); 
-		 return x.value ; // on récupère le contenu de la zone de saisie
-		}
-		</script>
-    <p>Nom de l'entreprise</p>
-	<input type="text" name="num" id="text2" onchange="myAction()" value="" size="30">
-		<script>
-		function myAction() {
-		var x = document.getElementById("text2"); 
-		 return x.value ; // on récupère le contenu de la zone de saisie
-		}
-		</script>
-	
-	<p>Nom du contact dans l'entreprise</p>
-	<input type="text" name="num" id="text3" onchange="myAction()" value="" size="30">
-		<script>
-		function myAction() {
-		var x = document.getElementById("text3"); 
-		 return x.value ; // on récupère le contenu de la zone de saisie
-		}
-		</script>
-	
-	<p>Numéro de telephone de l'entreprise</p>
-	<input type="text" name="num" id="text4" onchange="myAction()" value="" size="30">
-		<script>
-		function myAction() {
-		var x = document.getElementById("text4"); 
-		 return x.value ; // on récupère le contenu de la zone de saisie
-		}
-		</script>
-	
-    <h3>Vous voulez nous faire part de votre avis ! Entrez les informations suivantes : </h3>
-    <p>Nom de l'entreprise</p>
-	<input type="text" name="firstname" id="text5" onchange="myAction()" value="" size="30">
-		<script>
-		function myAction() {
-		var x = document.getElementById("text5"); 
-		 return x.value ; // on récupère le contenu de la zone de saisie
-		}
-		</script>
-    <p>Commentaire</p>
-	<input type="text" name="num" id="text6" onchange="myAction()" value="" size="30">
-		<script>
-		function myAction() {
-		var x = document.getElementById("text6"); 
-		 return x.value ; // on récupère le contenu de la zone de saisie
-		}
-		</script>
+
+  <!-- ============================================================
+       Formulaire 1 : proposer un nouveau partenaire
+       name="proposition-partenaire" doit être identique dans le
+       <form>, le input caché "form-name" et la valeur envoyée à
+       Netlify pour que Netlify Forms le reconnaisse au déploiement.
+       ============================================================ -->
+  <h3>Vous voulez nous proposer un nouveau partenaire ! Entrez les informations suivantes :</h3>
+  <form name="proposition-partenaire" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="proposition-partenaire">
+    <p class="honeypot-field">
+      <label>Ne pas remplir si vous êtes humain : <input name="bot-field"></label>
+    </p>
+
+    <p><label for="adherent">Nom de l'adhérent</label></p>
+    <input type="text" name="adherent" id="adherent" size="30">
+
+    <p><label for="entreprise-proposee">Nom de l'entreprise</label></p>
+    <input type="text" name="entreprise" id="entreprise-proposee" size="30">
+
+    <p><label for="contact-entreprise">Nom du contact dans l'entreprise</label></p>
+    <input type="text" name="contact_entreprise" id="contact-entreprise" size="30">
+
+    <p><label for="telephone-entreprise">Numéro de téléphone de l'entreprise</label></p>
+    <input type="text" name="telephone" id="telephone-entreprise" size="30">
+
+    <p><button type="submit">Envoyer la proposition</button></p>
+  </form>
+
+  <!-- ============================================================
+       Formulaire 2 : donner son avis / commentaire
+       ============================================================ -->
+  <h3>Vous voulez nous faire part de votre avis ! Entrez les informations suivantes :</h3>
+  <form name="avis-commentaire" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="avis-commentaire">
+    <p class="honeypot-field">
+      <label>Ne pas remplir si vous êtes humain : <input name="bot-field"></label>
+    </p>
+
+    <p><label for="entreprise-avis">Nom de l'entreprise</label></p>
+    <input type="text" name="entreprise" id="entreprise-avis" size="30">
+
+    <p><label for="commentaire">Commentaire</label></p>
+    <textarea name="commentaire" id="commentaire" rows="4" cols="40"></textarea>
+
+    <p><button type="submit">Envoyer l'avis</button></p>
+  </form>
 
 </body>
 </html>

@@ -214,6 +214,7 @@
     lng: -2.7927973
 - nom: Maison Hädenn
   categorie: Beauté/Bien-être/Bijoux
+  villes : []
   lien: https://www.maisonhadenn.fr
   description: 20 % sur la commande
   locations: []
@@ -539,6 +540,7 @@
     lng: -2.8000277
 - nom: DreamWay
   categorie: Travaux Décoration
+  villes : []
   lien: https://dreamway.fr/
   description: Tableaux en métal brillants et légers.<br>20 % sur les prix publics.
   locations: []

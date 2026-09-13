@@ -1,5 +1,10 @@
 html { font-size: 200%; }
 
+input, select, button, textarea {
+  font-size: 1rem;
+  font-family: inherit;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 20px;

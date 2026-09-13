@@ -89,6 +89,20 @@
     const citySelect = document.getElementById("citySelect");
     const listElement = document.getElementById("itemList");
 
+    // Petite fonction utilitaire : renvoie toujours un tableau, même si le champ
+    // "villes" est absent ou mal renseigné dans le YAML. Évite de faire planter
+    // toute la recherche à cause d'une seule enseigne mal configurée.
+    function villesDe(item) {
+      return Array.isArray(item.villes) ? item.villes : [];
+    }
+
+    // Texte à afficher pour les villes d'une enseigne : la liste des villes,
+    // ou "Disponible en ligne" si l'enseigne n'a pas de ville (uniquement sur Internet).
+    function texteVilles(item) {
+      const villes = villesDe(item);
+      return villes.length > 0 ? villes.join(", ") : "🌐 Disponible en ligne";
+    }
+
     // --- Carte interactive (Leaflet / OpenStreetMap) ---
     let map;
     let markersLayer;
@@ -139,7 +153,7 @@
 
       items.forEach((item, index) => {
         const li = document.createElement("li");
-        li.innerHTML = `<a href="#" onclick="openModal(${data.indexOf(item)}); return false;"><strong>${item.nom}</strong></a> — ${item.categorie} — Villes : ${item.villes.join(", ")}`;
+        li.innerHTML = `<a href="#" onclick="openModal(${data.indexOf(item)}); return false;"><strong>${item.nom}</strong></a> — ${item.categorie} — Villes : ${texteVilles(item)}`;
         listElement.appendChild(li);
       });
     }
@@ -149,7 +163,7 @@
       document.getElementById("modal-title").textContent = item.nom;
       document.getElementById("modal-categorie").textContent = item.categorie;
       const adresses = (item.locations || []).map(loc => loc.adresse);
-      document.getElementById("modal-villes").textContent = adresses.length > 0 ? adresses.join(" | ") : item.villes.join(", ");
+      document.getElementById("modal-villes").textContent = adresses.length > 0 ? adresses.join(" | ") : texteVilles(item);
       document.getElementById("modal-description").innerHTML = item.description;
       document.getElementById("modal-lien").href = item.lien || "#";
       document.getElementById("modal").style.display = "block";
@@ -185,7 +199,7 @@
 
     function populateDropdowns() {
       const categories = [...new Set(data.map(item => item.categorie))];
-      const cities = [...new Set(data.flatMap(item => item.villes))].sort((a, b) => a.localeCompare(b));
+      const cities = [...new Set(data.flatMap(item => villesDe(item)))].sort((a, b) => a.localeCompare(b));
 
       categories.forEach(cat => {
         const option = document.createElement("option");
@@ -211,10 +225,10 @@
         const matchesSearch =
           item.nom.toLowerCase().includes(search) ||
           item.categorie.toLowerCase().includes(search) ||
-          item.villes.some(v => v.toLowerCase().includes(search));
+          villesDe(item).some(v => v.toLowerCase().includes(search));
 
         const matchesCategory = selectedCat === "toutes" || item.categorie === selectedCat;
-        const matchesCity = selectedCity === "toutes" || item.villes.includes(selectedCity);
+        const matchesCity = selectedCity === "toutes" || villesDe(item).includes(selectedCity);
 
         return matchesSearch && matchesCategory && matchesCity;
       });

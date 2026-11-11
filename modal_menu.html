@@ -31,7 +31,7 @@
 <body>
   <!--   à penser à faire : hébergeur, si pas site, logo insta si -->
   
-  <img src="image.png" style="width: 150px;">
+  <img src="image.png" style="width: 200px;">
   <h2>Partenaires de l'amicale</h2>
   
   <ul class="onglet">
@@ -69,6 +69,9 @@
     <p><u>Catégorie :</u> <span id="modal-categorie"></span></p>
     <p><u>Villes / Adresse(s) :</u> <span id="modal-villes"></span></p>
     <p><u>Avantage et réduction :</u><br><span id="modal-description"></span></p>
+    <p id="modal-mode-p"><u>Modalité :</u> <span id="modal-mode"></span></p>
+    <p id="modal-contact-p"><u>Contact :</u> <span id="modal-contact"></span></p>
+    <p id="modal-infos-p"><u>Informations complémentaires :</u><br><span id="modal-infos"></span></p>
     <p><a id="modal-lien" href="#" target="_blank">Voir le site</a></p>
     <p><a id="modal-iti" href="#" target="_blank">Itinéraire</a></p>
     <button onclick="closeModal()">Fermer</button>
@@ -84,24 +87,18 @@
     // pour ne pas surcharger le code de la page. Elles sont chargées ci-dessous.
     let data = [];
 
+    // Une enseigne peut appartenir à plusieurs catégories : on lit la liste "categories"
+    // du YAML, et à défaut le champ simple "categorie".
+    function getCats(item) {
+      if (Array.isArray(item.categories) && item.categories.length > 0) return item.categories;
+      return item.categorie ? [item.categorie] : [];
+    }
+    function getVilles(item) { return item.villes || []; }
+
     const searchInput = document.getElementById("searchInput");
     const categorySelect = document.getElementById("categorySelect");
     const citySelect = document.getElementById("citySelect");
     const listElement = document.getElementById("itemList");
-
-    // Petite fonction utilitaire : renvoie toujours un tableau, même si le champ
-    // "villes" est absent ou mal renseigné dans le YAML. Évite de faire planter
-    // toute la recherche à cause d'une seule enseigne mal configurée.
-    function villesDe(item) {
-      return Array.isArray(item.villes) ? item.villes : [];
-    }
-
-    // Texte à afficher pour les villes d'une enseigne : la liste des villes,
-    // ou "Disponible en ligne" si l'enseigne n'a pas de ville (uniquement sur Internet).
-    function texteVilles(item) {
-      const villes = villesDe(item);
-      return villes.length > 0 ? villes.join(", ") : "🌐 Disponible en ligne";
-    }
 
     // --- Carte interactive (Leaflet / OpenStreetMap) ---
     let map;
@@ -127,7 +124,7 @@
           const marker = L.marker([loc.lat, loc.lng]);
           const popupHtml =
             `<span class="popup-titre">${item.nom}</span>` +
-            `${loc.adresse}<br><em>${item.categorie}</em>` +
+            `${loc.adresse}<br><em>${getCats(item).join(" · ")}</em>` +
             `<br><button class="popup-lien-fiche" onclick="openModal(${index}, ${locIndex})">Voir la fiche et l'itinéraire</button>`;
           marker.bindPopup(popupHtml);
           markersLayer.addLayer(marker);
@@ -153,7 +150,7 @@
 
       items.forEach((item, index) => {
         const li = document.createElement("li");
-        li.innerHTML = `<a href="#" onclick="openModal(${data.indexOf(item)}); return false;"><strong>${item.nom}</strong></a> — ${item.categorie} — Villes : ${texteVilles(item)}`;
+        li.innerHTML = `<a href="#" onclick="openModal(${data.indexOf(item)}); return false;"><strong>${item.nom}</strong></a> — ${getCats(item).join(" · ")} — ${getVilles(item).length ? "Villes : " + getVilles(item).join(", ") : "🌐 Disponible en ligne"}`;
         listElement.appendChild(li);
       });
     }
@@ -161,11 +158,32 @@
     function openModal(index, locIndex = 0) {
       const item = data[index];
       document.getElementById("modal-title").textContent = item.nom;
-      document.getElementById("modal-categorie").textContent = item.categorie;
+      document.getElementById("modal-categorie").textContent = getCats(item).join(" · ");
       const adresses = (item.locations || []).map(loc => loc.adresse);
-      document.getElementById("modal-villes").textContent = adresses.length > 0 ? adresses.join(" | ") : texteVilles(item);
+      document.getElementById("modal-villes").textContent = adresses.length > 0 ? adresses.join(" | ") : (getVilles(item).length ? getVilles(item).join(", ") : "🌐 Disponible en ligne");
       document.getElementById("modal-description").innerHTML = item.description;
-      document.getElementById("modal-lien").href = item.lien || "#";
+      const lienEl = document.getElementById("modal-lien");
+      lienEl.href = item.lien || "#";
+      lienEl.parentElement.style.display = item.lien ? "block" : "none";
+
+      // Modalité (sur place, via l'Amicale, sur Internet…)
+      document.getElementById("modal-mode").textContent = item.mode || "";
+      document.getElementById("modal-mode-p").style.display = item.mode ? "block" : "none";
+
+      // Contact : téléphone de l'adresse cliquée (sinon téléphone de l'enseigne) + email
+      const locCliquee = (item.locations || [])[locIndex];
+      const tel = (locCliquee && locCliquee.telephone) || item.telephone || "";
+      const contactEl = document.getElementById("modal-contact");
+      contactEl.innerHTML = "";
+      const morceaux = [];
+      if (tel) morceaux.push(`<a href="tel:${tel.replace(/\s/g, "")}">${tel}</a>`);
+      if (item.email) morceaux.push(`<a href="mailto:${item.email}">${item.email}</a>`);
+      contactEl.innerHTML = morceaux.join(" — ");
+      document.getElementById("modal-contact-p").style.display = morceaux.length ? "block" : "none";
+
+      // Informations complémentaires
+      document.getElementById("modal-infos").innerHTML = item.infos || "";
+      document.getElementById("modal-infos-p").style.display = item.infos ? "block" : "none";
       document.getElementById("modal").style.display = "block";
       document.getElementById("overlay").style.display = "block";
 
@@ -198,8 +216,8 @@
     }
 
     function populateDropdowns() {
-      const categories = [...new Set(data.map(item => item.categorie))];
-      const cities = [...new Set(data.flatMap(item => villesDe(item)))].sort((a, b) => a.localeCompare(b));
+      const categories = [...new Set(data.flatMap(item => getCats(item)))].sort((a, b) => a.localeCompare(b, "fr"));
+      const cities = [...new Set(data.flatMap(item => getVilles(item)))].sort((a, b) => a.localeCompare(b, "fr"));
 
       categories.forEach(cat => {
         const option = document.createElement("option");
@@ -224,11 +242,11 @@
       const filtered = data.filter(item => {
         const matchesSearch =
           item.nom.toLowerCase().includes(search) ||
-          item.categorie.toLowerCase().includes(search) ||
-          villesDe(item).some(v => v.toLowerCase().includes(search));
+          getCats(item).some(c => c.toLowerCase().includes(search)) ||
+          getVilles(item).some(v => v.toLowerCase().includes(search));
 
-        const matchesCategory = selectedCat === "toutes" || item.categorie === selectedCat;
-        const matchesCity = selectedCity === "toutes" || villesDe(item).includes(selectedCity);
+        const matchesCategory = selectedCat === "toutes" || getCats(item).includes(selectedCat);
+        const matchesCity = selectedCity === "toutes" || getVilles(item).includes(selectedCity);
 
         return matchesSearch && matchesCategory && matchesCity;
       });
@@ -261,6 +279,8 @@
         }
         const texteYaml = await reponse.text();
         data = jsyaml.load(texteYaml);
+        // Tri alphabétique (insensible aux accents, aux majuscules et à la ponctuation)
+        data.sort((a, b) => a.nom.localeCompare(b.nom, "fr", { sensitivity: "base", ignorePunctuation: true }));
 
         statusEl.style.display = "none";
         initMap();

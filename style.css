@@ -1,16 +1,13 @@
 html { font-size: 200%; }
 
-input, select, button, textarea {
-  font-size: 1rem;
-  font-family: inherit;
-}
-
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
 
-input, select, button {
+input, select, button, textarea {
+    font-size: 1rem;
+    font-family: inherit;
     padding: 10px;
     margin-right: 10px;
     margin-bottom: 20px;
@@ -60,6 +57,8 @@ a:hover {
     border: 1px solid #aaa;
     box-shadow: 0 0 10px #000;
     z-index: 1000;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 #overlay {
